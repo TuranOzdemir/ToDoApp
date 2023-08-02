@@ -5,10 +5,12 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')  # SQLite database file: todo_app.db
-# postgres://tododb_lwlb_user:xo5LblHGjwWa15QWTYkFvFkMWGgU6D2W@dpg-cj55t1k5kgrc738ph6kg-a.oregon-postgres.render.com/tododb_lwlb
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')  # SQLite database file: todo_app.db
+    # postgres://tododb_lwlb_user:xo5LblHGjwWa15QWTYkFvFkMWGgU6D2W@dpg-cj55t1k5kgrc738ph6kg-a.oregon-postgres.render.com/tododb_lwlb
+    return app
+app = create_app()
 db = SQLAlchemy(app)
 
 class Todo(db.Model):
